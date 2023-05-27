@@ -1,0 +1,17 @@
+{
+	"files": [
+		"./main.ts",
+		"./healthcheck.ts"
+	],
+	"compilerOptions": {
+		"target": "ES3",
+		"typeRoots": [
+			"./node_modules"
+		],
+		"outFile": "./build/index.js",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true
+	}
+}
