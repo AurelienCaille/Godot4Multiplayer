@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuc6kbm2hvm4w"]
+
+[ext_resource type="Script" path="res://addons/Multiplayer/Lobby/LobbyManager.gd" id="1_4qcdc"]
+
+[node name="LobbyManager" type="Node"]
+script = ExtResource("1_4qcdc")

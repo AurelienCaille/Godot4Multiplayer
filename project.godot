@@ -17,3 +17,5 @@ config/icon="res://icon.svg"
 [autoload]
 
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+LobbyManager="*res://addons/Multiplayer/Lobby/LobbyManager.tscn"
+MultiplayerManager="*res://addons/Multiplayer/MultiplayerManager.tscn"

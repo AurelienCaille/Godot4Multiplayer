@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://1ya8k004c173"]
+
+[ext_resource type="Script" path="res://addons/Multiplayer/Demos/LobbyDemo.gd" id="1_db50j"]
+[ext_resource type="PackedScene" uid="uid://bqiia7x3tsmap" path="res://addons/Multiplayer/Lobby/UI/matches_list_ui.tscn" id="2_woicc"]
+[ext_resource type="Script" path="res://addons/Multiplayer/Demos/HostMatchUI.gd" id="3_jxc0t"]
+[ext_resource type="Script" path="res://addons/Multiplayer/Demos/JoinMatchUI.gd" id="4_jrk5l"]
+
+[node name="LobbyDemo" type="Node"]
+script = ExtResource("1_db50j")
+
+[node name="MatchesListUI" parent="." instance=ExtResource("2_woicc")]
+anchors_preset = -1
+anchor_right = 0.458333
+anchor_bottom = 0.888889
+metadata/_edit_use_anchors_ = true
+
+[node name="HostMatchUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 576.0
+offset_right = 768.0
+offset_bottom = 64.0
+script = ExtResource("3_jxc0t")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HostMatchUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="LineEdit" type="LineEdit" parent="HostMatchUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Name"
+
+[node name="HostButton" type="Button" parent="HostMatchUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Host"
+
+[node name="JoinMatchUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 576.0
+offset_top = 128.0
+offset_right = 768.0
+offset_bottom = 192.0
+script = ExtResource("4_jrk5l")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="JoinMatchUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="LineEdit" type="LineEdit" parent="JoinMatchUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Name"
+
+[node name="JoinButton" type="Button" parent="JoinMatchUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Join"
+
+[node name="MatchUI" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.722222
+anchor_right = 1.0
+anchor_bottom = 0.737654
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="MatchUI"]
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 576.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MatchUI/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.8
+anchor_bottom = 0.829861
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MatchUI/Control/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="HostMatchUI/HBoxContainer/HostButton" to="HostMatchUI" method="_on_host_button_pressed"]
+[connection signal="pressed" from="JoinMatchUI/HBoxContainer/JoinButton" to="JoinMatchUI" method="_on_join_button_pressed"]
