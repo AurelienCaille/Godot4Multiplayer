@@ -1,4 +1,19 @@
-﻿logger:
-  level: DEBUG
+﻿#data_dir: "./data"
+
+metrics:
+  reporting_freq_sec: 60
+  namespace: ""
+  prometheus_port: 0
+
+database:
+  address:
+  - "root@db:26257"
+  conn_max_lifetime_ms: 0
+  max_open_conns: 0
+  max_idle_conns: 100
+
+logger:
+  level: "debug"
+
 runtime:
-  js_entrypoint: "build/index.js"
+  js_entrypoint: "../build/index.js"
