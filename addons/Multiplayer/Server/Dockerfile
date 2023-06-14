@@ -3,13 +3,14 @@ FROM node:alpine AS node-builder
 WORKDIR /backend
 
 COPY package*.json ./
-RUN npm install
 COPY tsconfig.json ./
-COPY src/*.ts ./
+COPY src src
+
+RUN npm install
 RUN npx tsc
 
 FROM heroiclabs/nakama:3.16.0
 WORKDIR /nakama
-RUN mkdir /nakama/data/modules/build/
-COPY --from=node-builder /backend/build/*.js /nakama/data/modules/build/
-COPY local.yml /nakama/data/
+RUN mkdir data/build
+COPY --from=node-builder /backend/build data/build
+COPY local.yml data/local.yml
