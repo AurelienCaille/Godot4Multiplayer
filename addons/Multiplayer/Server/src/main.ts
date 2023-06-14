@@ -2,15 +2,15 @@ function InitModule(ctx : nkruntime.Context, logger : nkruntime.Logger, nk : nkr
 	initializer.registerRpc("healthcheck", rpcHealthCheck);
 	initializer.registerRpc("createPublicMatch", rpcCreatePublicMatch);
 
-	/*initializer.registerMatch("lobby", {
+	initializer.registerMatch("lobby", {
 		matchInit,
 		matchJoinAttempt,
 		matchJoin,
 		matchLeave,
 		matchLoop,
-		matchSignal,
-		matchTerminate
-	})*/
+		matchTerminate,
+		matchSignal
+	});
 
 
 	logger.info("Javascript module loaded");

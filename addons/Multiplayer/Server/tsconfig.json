@@ -2,10 +2,11 @@
 	"files": [
 		"./src/main.ts",
 		"./src/healthcheck.ts",
-		"./src/lobby.ts"
+		"./src/lobby.ts",
+		"./src/match_handler.ts"
 	],
 	"compilerOptions": {
-		"target": "ES6",
+		"target": "ES5",
 		"typeRoots": [
 			"./node_modules"
 		],

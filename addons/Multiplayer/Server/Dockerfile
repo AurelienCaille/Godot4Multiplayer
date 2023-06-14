@@ -7,6 +7,7 @@ COPY tsconfig.json ./
 COPY src src
 
 RUN npm install
+RUN npm install typescript
 RUN npx tsc
 
 FROM heroiclabs/nakama:3.16.0
