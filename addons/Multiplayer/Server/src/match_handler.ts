@@ -1,5 +1,5 @@
 const tickRate = 5;
-const maxEmptySec = 30;
+const maxEmptySec = 60*5;
 
 interface MatchLabel {
 	open: number
