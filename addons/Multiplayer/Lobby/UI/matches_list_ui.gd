@@ -22,8 +22,8 @@ func draw_list(matches_list : Array) -> void:
 		var new_button := Button.new()
 		list_v_box_container.add_child(new_button)
 		
-		new_button.text = match_data.match_id
-		new_button.pressed.connect(_on_match_button_pressed.bind(match_data.match_id))
+		new_button.text = match_data.matchId
+		new_button.pressed.connect(_on_match_button_pressed.bind(match_data.matchId))
 
 
 func _on_match_button_pressed(match_id : String):

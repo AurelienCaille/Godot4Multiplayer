@@ -22,8 +22,9 @@ interface State {
 }
 
 let matchInit: nkruntime.MatchInitFunction<State> = function (ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, params: {[key: string]: string}) {
+
 	var label: MatchLabel = {
-		is_private: true,
+		is_private: JSON.parse(params["is_private"]),
 		max_player: 8,
 		open: 1,
 	}

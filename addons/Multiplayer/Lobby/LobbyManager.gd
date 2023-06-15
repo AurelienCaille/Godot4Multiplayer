@@ -38,16 +38,25 @@ func initialize(client : NakamaClient, session : NakamaSession, socket : NakamaS
 
 ## Récupère la liste des matches publiques
 func get_public_matches() -> Array:
-	var result = await nakama_client.list_matches_async(
-		nakama_session,
-		min_player,
-		max_player,
-		limit,
-		authoritative,
-		label,
-		query)
+#	var result = await nakama_client.list_matches_async(
+#		nakama_session,
+#		min_player,
+#		max_player,
+#		limit,
+#		authoritative,
+#		label,
+#		query)
+#
+#	return result.matches
+	var responses : NakamaAPI.ApiRpc = await nakama_client.rpc_async(nakama_session, "listPublicMatch")
+
+	if responses.is_exception():
+		print("Error while trying to list all public match, %s" % responses)
+		return []
 	
-	return result.matches
+	var json_payload = JSON.parse_string(responses.payload)
+	
+	return json_payload.matches
 
 
 ## Rejoind un match privé à partir d'un id
@@ -61,3 +70,13 @@ func join_private_match(match_id : String):
 func create_private_match(match_id : String):
 #	var result : NakamaAsyncResult = await nakama_socket.create_match_async(match_id)
 	multiplayer_bridge.join_named_match(match_id)
+
+
+## Créer un match public à partir d'un id
+func create_public_match(match_id : String):
+	var responses : NakamaAPI.ApiRpc = await nakama_client.rpc_async(nakama_session, "createPublicmatch")
+
+	if responses.is_exception():
+		print("Error while trying to create private match, %s" % responses)
+
+	print_debug(responses.payload)

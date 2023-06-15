@@ -36,6 +36,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Name"
 
+[node name="PrivateCheckButton" type="CheckButton" parent="HostMatchUI/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Private"
+
 [node name="HostButton" type="Button" parent="HostMatchUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
