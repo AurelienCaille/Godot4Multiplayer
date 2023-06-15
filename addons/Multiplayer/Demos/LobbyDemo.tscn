@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://1ya8k004c173"]
+[gd_scene load_steps=6 format=3 uid="uid://1ya8k004c173"]
 
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/LobbyDemo.gd" id="1_db50j"]
 [ext_resource type="PackedScene" uid="uid://bqiia7x3tsmap" path="res://addons/Multiplayer/Lobby/UI/matches_list_ui.tscn" id="2_woicc"]
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/HostMatchUI.gd" id="3_jxc0t"]
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/JoinMatchUI.gd" id="4_jrk5l"]
+
+[sub_resource type="GDScript" id="GDScript_ci3vm"]
+script/source = "extends CheckButton
+
+
+func _on_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		text = \"Private\"
+	else:
+		text = \"Public\"
+"
 
 [node name="LobbyDemo" type="Node"]
 script = ExtResource("1_db50j")
@@ -40,6 +51,7 @@ placeholder_text = "Name"
 layout_mode = 2
 button_pressed = true
 text = "Private"
+script = SubResource("GDScript_ci3vm")
 
 [node name="HostButton" type="Button" parent="HostMatchUI/HBoxContainer"]
 layout_mode = 2
@@ -97,5 +109,6 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 size_flags_horizontal = 3
 
+[connection signal="toggled" from="HostMatchUI/HBoxContainer/PrivateCheckButton" to="HostMatchUI/HBoxContainer/PrivateCheckButton" method="_on_toggled"]
 [connection signal="pressed" from="HostMatchUI/HBoxContainer/HostButton" to="HostMatchUI" method="_on_host_button_pressed"]
 [connection signal="pressed" from="JoinMatchUI/HBoxContainer/JoinButton" to="JoinMatchUI" method="_on_join_button_pressed"]
