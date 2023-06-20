@@ -11,4 +11,14 @@ func _ready() -> void:
 		null
 	)
 	
+	MultiplayerManager.match_joined.connect(_on_multiplayer_manager_match_joinded)
+
+
+func _on_matches_list_ui_match_selected(match_id) -> void:
+	var match_nakama = await MultiplayerManager.connect_to_match(match_id)
 	
+	
+
+
+func _on_multiplayer_manager_match_joinded(match_nakama):
+	$CanvasLayer/MatchUI.refresh = true

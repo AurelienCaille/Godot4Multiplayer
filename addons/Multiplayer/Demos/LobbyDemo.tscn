@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://1ya8k004c173"]
+[gd_scene load_steps=7 format=3 uid="uid://1ya8k004c173"]
 
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/LobbyDemo.gd" id="1_db50j"]
 [ext_resource type="PackedScene" uid="uid://bqiia7x3tsmap" path="res://addons/Multiplayer/Lobby/UI/matches_list_ui.tscn" id="2_woicc"]
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/HostMatchUI.gd" id="3_jxc0t"]
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/JoinMatchUI.gd" id="4_jrk5l"]
+[ext_resource type="Script" path="res://addons/Multiplayer/Demos/MatchUI.gd" id="5_6k4n0"]
 
 [sub_resource type="GDScript" id="GDScript_ci3vm"]
 script/source = "extends CheckButton
@@ -19,13 +20,14 @@ func _on_toggled(button_pressed: bool) -> void:
 [node name="LobbyDemo" type="Node"]
 script = ExtResource("1_db50j")
 
-[node name="MatchesListUI" parent="." instance=ExtResource("2_woicc")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MatchesListUI" parent="CanvasLayer" instance=ExtResource("2_woicc")]
 anchors_preset = -1
 anchor_right = 0.458333
 anchor_bottom = 0.888889
-metadata/_edit_use_anchors_ = true
 
-[node name="HostMatchUI" type="Control" parent="."]
+[node name="HostMatchUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 576.0
@@ -33,32 +35,31 @@ offset_right = 768.0
 offset_bottom = 64.0
 script = ExtResource("3_jxc0t")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HostMatchUI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HostMatchUI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="LineEdit" type="LineEdit" parent="HostMatchUI/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/HostMatchUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Name"
 
-[node name="PrivateCheckButton" type="CheckButton" parent="HostMatchUI/HBoxContainer"]
+[node name="PrivateCheckButton" type="CheckButton" parent="CanvasLayer/HostMatchUI/HBoxContainer"]
 layout_mode = 2
 button_pressed = true
 text = "Private"
 script = SubResource("GDScript_ci3vm")
 
-[node name="HostButton" type="Button" parent="HostMatchUI/HBoxContainer"]
+[node name="HostButton" type="Button" parent="CanvasLayer/HostMatchUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Host"
 
-[node name="JoinMatchUI" type="Control" parent="."]
+[node name="JoinMatchUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 576.0
@@ -67,48 +68,49 @@ offset_right = 768.0
 offset_bottom = 192.0
 script = ExtResource("4_jrk5l")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="JoinMatchUI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/JoinMatchUI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="LineEdit" type="LineEdit" parent="JoinMatchUI/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/JoinMatchUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Name"
 
-[node name="JoinButton" type="Button" parent="JoinMatchUI/HBoxContainer"]
+[node name="JoinButton" type="Button" parent="CanvasLayer/JoinMatchUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Join"
 
-[node name="MatchUI" type="Control" parent="."]
+[node name="MatchUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchor_left = 0.722222
 anchor_right = 1.0
 anchor_bottom = 0.737654
-metadata/_edit_use_anchors_ = true
+script = ExtResource("5_6k4n0")
 
-[node name="Control" type="Control" parent="MatchUI"]
+[node name="Control" type="Control" parent="CanvasLayer/MatchUI"]
 anchors_preset = 0
 offset_right = 320.0
 offset_bottom = 576.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MatchUI/Control"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/MatchUI/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.8
 anchor_bottom = 0.829861
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MatchUI/Control/ScrollContainer"]
+[node name="ListPlayersInMatch" type="VBoxContainer" parent="CanvasLayer/MatchUI/Control/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[connection signal="toggled" from="HostMatchUI/HBoxContainer/PrivateCheckButton" to="HostMatchUI/HBoxContainer/PrivateCheckButton" method="_on_toggled"]
-[connection signal="pressed" from="HostMatchUI/HBoxContainer/HostButton" to="HostMatchUI" method="_on_host_button_pressed"]
-[connection signal="pressed" from="JoinMatchUI/HBoxContainer/JoinButton" to="JoinMatchUI" method="_on_join_button_pressed"]
+[connection signal="match_selected" from="CanvasLayer/MatchesListUI" to="." method="_on_matches_list_ui_match_selected"]
+[connection signal="toggled" from="CanvasLayer/HostMatchUI/HBoxContainer/PrivateCheckButton" to="CanvasLayer/HostMatchUI/HBoxContainer/PrivateCheckButton" method="_on_toggled"]
+[connection signal="pressed" from="CanvasLayer/HostMatchUI/HBoxContainer/HostButton" to="CanvasLayer/HostMatchUI" method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/JoinMatchUI/HBoxContainer/JoinButton" to="CanvasLayer/JoinMatchUI" method="_on_join_button_pressed"]
