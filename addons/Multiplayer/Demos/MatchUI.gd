@@ -17,3 +17,8 @@ func draw_players_list():
 		new_label.text = player_id
 		
 		list_players_in_match.add_child(new_label)
+
+
+func _on_play_button_pressed() -> void:
+	if multiplayer.is_server():
+		MultiplayerManager.rpc_start_match.rpc()

@@ -23,11 +23,11 @@ var query = ""
 
 
 
-func initialize(client : NakamaClient, session : NakamaSession, socket : NakamaSocket, hud_packed : PackedScene):
+func initialize(client : NakamaClient, session : NakamaSession, socket : NakamaSocket, multiplayer_bridge, hud_packed : PackedScene):
 	nakama_client = client
 	nakama_session = session
 	nakama_socket = socket
-	multiplayer_bridge = MultiplayerManager.multiplayer_bridge
+	self.multiplayer_bridge = multiplayer_bridge
 	
 	if hud_packed and hud_packed.can_instantiate():
 		hud = hud_packed.instantiate()
@@ -79,4 +79,9 @@ func create_public_match(match_id : String):
 	if responses.is_exception():
 		print("Error while trying to create private match, %s" % responses)
 
+	var payload_json : Dictionary = JSON.parse_string(responses.payload)
+	
+	MultiplayerManager.connect_to_match(payload_json["matchId"])
+#	MultiplayerManager.match_joined.emit(payload_json)
+	
 	print_debug(responses.payload)

@@ -102,7 +102,7 @@ offset_bottom = 576.0
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.8
-anchor_bottom = 0.829861
+anchor_bottom = 0.666667
 metadata/_edit_use_anchors_ = true
 
 [node name="ListPlayersInMatch" type="VBoxContainer" parent="CanvasLayer/MatchUI/Control/ScrollContainer"]
@@ -110,7 +110,16 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PlayButton" type="Button" parent="CanvasLayer/MatchUI/Control"]
+layout_mode = 0
+offset_left = 0.000305176
+offset_top = 384.0
+offset_right = 128.0
+offset_bottom = 408.0
+text = "Play"
+
 [connection signal="match_selected" from="CanvasLayer/MatchesListUI" to="." method="_on_matches_list_ui_match_selected"]
 [connection signal="toggled" from="CanvasLayer/HostMatchUI/HBoxContainer/PrivateCheckButton" to="CanvasLayer/HostMatchUI/HBoxContainer/PrivateCheckButton" method="_on_toggled"]
 [connection signal="pressed" from="CanvasLayer/HostMatchUI/HBoxContainer/HostButton" to="CanvasLayer/HostMatchUI" method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/JoinMatchUI/HBoxContainer/JoinButton" to="CanvasLayer/JoinMatchUI" method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MatchUI/Control/PlayButton" to="CanvasLayer/MatchUI" method="_on_play_button_pressed"]

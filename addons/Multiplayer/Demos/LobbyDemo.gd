@@ -8,10 +8,12 @@ func _ready() -> void:
 		MultiplayerManager.client,
 		MultiplayerManager.session,
 		MultiplayerManager.socket,
+		MultiplayerManager.multiplayer_bridge,
 		null
 	)
 	
 	MultiplayerManager.match_joined.connect(_on_multiplayer_manager_match_joinded)
+	MultiplayerManager.match_started.connect(_on_multiplayer_manager_match_started)
 
 
 func _on_matches_list_ui_match_selected(match_id) -> void:
@@ -22,3 +24,7 @@ func _on_matches_list_ui_match_selected(match_id) -> void:
 
 func _on_multiplayer_manager_match_joinded(match_nakama):
 	$CanvasLayer/MatchUI.refresh = true
+
+
+func _on_multiplayer_manager_match_started():
+	$CanvasLayer.hide()

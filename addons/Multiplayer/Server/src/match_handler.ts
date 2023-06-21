@@ -113,6 +113,7 @@ let matchLeave: nkruntime.MatchLeaveFunction<State> = function(ctx: nkruntime.Co
 let matchLoop: nkruntime.MatchLoopFunction<State> = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: State, messages: nkruntime.MatchMessage[]) {
 	logger.debug('Running match loop. Tick %d', tick);
 
+	/*
 	if (connectedPlayer(state) + state.joinsInProgress ===0) {
 		state.emptyTicks++;
 		if (state.emptyTicks >= maxEmptySec * tickRate) {
@@ -121,6 +122,7 @@ let matchLoop: nkruntime.MatchLoopFunction<State> = function(ctx: nkruntime.Cont
 			return null;
 		}
 	}
+	*/
 
 	let t = msecToSec(Date.now());
 
