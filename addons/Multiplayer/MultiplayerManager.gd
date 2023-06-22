@@ -44,28 +44,10 @@ func initialize(server_ip : String, server_port : int):
 	multiplayer_bridge.match_joined.connect(self._on_match_joined)
 
 
-func _on_match_join_error(error):
-	print ("Unable to join match: ", error.message)
-
-func _on_match_joined() -> void:
-	print ("Joined match with id: ", multiplayer_bridge.match_id)
-
-func _on_peer_connected(peer_id):
-	print ("Peer joined match: ", peer_id)
-
-func _on_peer_disconnected(peer_id):
-	print ("Peer left match: ", peer_id)
-
-
 func connect_to_match(match_id):
-	var match_nakama = await multiplayer_bridge.join_named_match(match_id)
-	
-#	for player in match_nakama.presences:
-#		players_in_current_match[player.user_id] = player
-		
-	match_joined.emit(match_nakama)
+	await multiplayer_bridge.join_named_match(match_id)
 
-	return match_nakama
+	match_joined.emit(null)
 
 
 @rpc("any_peer", "call_local")
@@ -80,3 +62,18 @@ func _on_match_presence(p_presence : NakamaRTAPI.MatchPresenceEvent):
 	for presence in p_presence.leaves:
 		players_in_current_match.erase(presence.user_id)
 
+
+func _on_match_join_error(error):
+	print ("Unable to join match: ", error.message)
+
+
+func _on_match_joined() -> void:
+	print ("Joined match with id: ", multiplayer_bridge.match_id)
+
+
+func _on_peer_connected(peer_id):
+	print ("Peer joined match: ", peer_id)
+
+
+func _on_peer_disconnected(peer_id):
+	print ("Peer left match: ", peer_id)
