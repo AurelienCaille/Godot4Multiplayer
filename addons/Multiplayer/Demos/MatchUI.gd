@@ -3,10 +3,15 @@ extends Control
 var refresh : bool = false
 
 @onready var list_players_in_match: VBoxContainer = %ListPlayersInMatch
+@onready var play_button: Button = $Control/PlayButton
+
 
 func _process(delta: float) -> void:
 	if refresh:
 		draw_players_list()
+		
+	play_button.visible = multiplayer.is_server()
+
 
 func draw_players_list():
 	for c in list_players_in_match.get_children():
