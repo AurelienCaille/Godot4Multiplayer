@@ -5,11 +5,13 @@ var client : NakamaClient
 var session : NakamaSession
 var socket : NakamaSocket
 var multiplayer_bridge : NakamaMultiplayerBridge
+var has_nakama_connection : bool = false
 
 
-var players_in_current_match = {}
+@export var players_in_current_match = {}
 
 signal match_joined(match_nakama)
+signal match_ip_joined
 signal match_started
 
 
@@ -32,6 +34,7 @@ func initialize(server_ip : String, server_port : int):
 	
 	if session.is_exception():
 		print("error with session: %s" % [session])
+		return
 	
 	socket = Nakama.create_socket_from(client)
 	var connected : NakamaAsyncResult = await (socket.connect_async(session))
@@ -50,6 +53,35 @@ func initialize(server_ip : String, server_port : int):
 	get_tree().get_multiplayer().peer_disconnected.connect(self._on_peer_disconnected)
 	multiplayer_bridge.match_join_error.connect(self._on_match_join_error)
 	multiplayer_bridge.match_joined.connect(self._on_match_joined)
+	
+	has_nakama_connection = true
+
+
+func initialize_host_ip(server_port : int = 5269):
+	var peer := ENetMultiplayerPeer.new()
+	
+	peer.create_server(server_port)
+	get_tree().get_multiplayer().multiplayer_peer = peer
+	
+	get_tree().get_multiplayer().peer_connected.connect(self._on_peer_connected)
+	get_tree().get_multiplayer().peer_disconnected.connect(self._on_peer_disconnected)
+
+	var id = get_tree().get_multiplayer().get_unique_id()
+	players_in_current_match[id] = id
+	match_ip_joined.emit()
+
+
+func connect_to_match_ip(ip : String, server_port : int = 5269):
+	var peer := ENetMultiplayerPeer.new()
+	
+	var err := peer.create_client(ip, server_port)
+	if err != OK:
+		push_warning("Error while creating ip client")
+		return
+	
+	get_tree().get_multiplayer().multiplayer_peer = peer
+	
+	match_ip_joined.emit()
 
 
 # Connect to a nakama match via match_id
@@ -86,6 +118,7 @@ func _on_match_joined() -> void:
 
 func _on_peer_connected(peer_id):
 	print ("Peer joined match: ", peer_id)
+	players_in_current_match[peer_id] = peer_id
 
 
 func _on_peer_disconnected(peer_id):

@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqoxeubb7p7qs"]
+[gd_scene load_steps=3 format=3 uid="uid://cqoxeubb7p7qs"]
 
 [ext_resource type="Script" path="res://addons/Multiplayer/MultiplayerManager.gd" id="1_kbqye"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xsh0n"]
+properties/0/path = NodePath(".:players_in_current_match")
+properties/0/spawn = true
+properties/0/sync = true
+
 [node name="MultiplayerManager" type="Node"]
 script = ExtResource("1_kbqye")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xsh0n")

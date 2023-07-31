@@ -19,7 +19,7 @@ func draw_players_list():
 	
 	for player_id in MultiplayerManager.players_in_current_match:
 		var new_label = Label.new()
-		new_label.text = player_id
+		new_label.text = str(player_id)
 		
 		list_players_in_match.add_child(new_label)
 
