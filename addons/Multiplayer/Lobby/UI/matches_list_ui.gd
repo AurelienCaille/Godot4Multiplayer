@@ -8,8 +8,11 @@ signal match_selected(match_id : String)
 
 
 func draw_list_from_manager() -> void:
-	var matches_list = await LobbyManager.get_public_matches()
-	draw_list(matches_list)
+	var nakama_matches_list : Array = []
+	if MultiplayerManager.has_nakama_connection:
+		nakama_matches_list = await LobbyManager.get_public_matches()
+	
+	draw_list(nakama_matches_list)
 
 
 func draw_list(matches_list : Array) -> void:
