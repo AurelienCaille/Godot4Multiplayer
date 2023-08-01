@@ -67,7 +67,7 @@ func initialize_host_ip(server_port : int = 5269):
 	get_tree().get_multiplayer().peer_disconnected.connect(self._on_peer_disconnected)
 
 	var id = get_tree().get_multiplayer().get_unique_id()
-	players_in_current_match[id] = id
+	players_in_current_match[str(id)] = id
 	match_ip_joined.emit()
 
 
@@ -118,7 +118,7 @@ func _on_match_joined() -> void:
 
 func _on_peer_connected(peer_id):
 	print ("Peer joined match: ", peer_id)
-	players_in_current_match[peer_id] = peer_id
+	players_in_current_match[str(peer_id)] = peer_id
 
 
 func _on_peer_disconnected(peer_id):
