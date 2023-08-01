@@ -7,12 +7,16 @@ var socket : NakamaSocket
 var multiplayer_bridge : NakamaMultiplayerBridge
 var has_nakama_connection : bool = false
 
-
+var local_user_id : String
 @export var players_in_current_match = {}
 
 signal match_joined(match_nakama)
 signal match_ip_joined
 signal match_started
+
+
+func _ready() -> void:
+	get_tree().get_multiplayer().connected_to_server.connect(self._on_match_joined)
 
 
 # Prepare the multiplayer system
@@ -55,6 +59,8 @@ func initialize(server_ip : String, server_port : int):
 	multiplayer_bridge.match_joined.connect(self._on_match_joined)
 	
 	has_nakama_connection = true
+	local_user_id = str(session.user_id)
+
 
 
 func initialize_host_ip(server_port : int = 5269):
@@ -66,8 +72,10 @@ func initialize_host_ip(server_port : int = 5269):
 	get_tree().get_multiplayer().peer_connected.connect(self._on_peer_connected)
 	get_tree().get_multiplayer().peer_disconnected.connect(self._on_peer_disconnected)
 
+
 	var id = get_tree().get_multiplayer().get_unique_id()
 	players_in_current_match[str(id)] = id
+	local_user_id = str(id)
 	match_ip_joined.emit()
 
 
@@ -113,7 +121,9 @@ func _on_match_join_error(error):
 
 
 func _on_match_joined() -> void:
-	print ("Joined match with id: ", multiplayer_bridge.match_id)
+	var match_id = multiplayer_bridge.match_id if multiplayer_bridge else "local, no nakama ID"
+	print ("Joined match with id: ", match_id)
+	local_user_id = str(multiplayer.get_unique_id())
 
 
 func _on_peer_connected(peer_id):
