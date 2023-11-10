@@ -6,6 +6,7 @@
 properties/0/path = NodePath(".:players_in_current_match")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 
 [node name="MultiplayerManager" type="Node"]
 script = ExtResource("1_kbqye")

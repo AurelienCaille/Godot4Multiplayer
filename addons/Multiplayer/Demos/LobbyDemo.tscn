@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://1ya8k004c173"]
+[gd_scene load_steps=9 format=3 uid="uid://1ya8k004c173"]
 
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/LobbyDemo.gd" id="1_db50j"]
 [ext_resource type="PackedScene" uid="uid://bqiia7x3tsmap" path="res://addons/Multiplayer/Lobby/UI/matches_list_ui.tscn" id="2_woicc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/DirectIPHostConnect.gd" id="4_bwcs2"]
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/JoinMatchUI.gd" id="4_jrk5l"]
 [ext_resource type="Script" path="res://addons/Multiplayer/Demos/MatchUI.gd" id="5_6k4n0"]
+[ext_resource type="Script" path="res://addons/Multiplayer/Demos/MatchesLANListUI.gd" id="7_aacu7"]
 
 [sub_resource type="GDScript" id="GDScript_ci3vm"]
 script/source = "extends CheckButton
@@ -187,6 +188,23 @@ anchor_bottom = 0.946755
 text = "Host"
 metadata/_edit_use_anchors_ = true
 
+[node name="MatchesLANListUI" type="Control" parent="CanvasLayer/TabContainer/LAN"]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 9.0
+offset_right = 560.0
+offset_bottom = 585.0
+script = ExtResource("7_aacu7")
+
+[node name="ServerListContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/LAN/MatchesLANListUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Timer" type="Timer" parent="CanvasLayer/TabContainer/LAN/MatchesLANListUI"]
+wait_time = 3.0
+autostart = true
+
 [connection signal="pressed" from="CanvasLayer/MatchUI/Control/PlayButton" to="CanvasLayer/MatchUI" method="_on_play_button_pressed"]
 [connection signal="match_selected" from="CanvasLayer/TabContainer/Network/MatchesListUI" to="." method="_on_matches_list_ui_match_selected"]
 [connection signal="toggled" from="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer/PrivateCheckButton" to="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer/PrivateCheckButton" method="_on_toggled"]
@@ -196,3 +214,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="ip_connection_requested" from="CanvasLayer/TabContainer/LAN" to="." method="_on_direct_ip_host_connect_ip_connection_requested"]
 [connection signal="pressed" from="CanvasLayer/TabContainer/LAN/HBoxContainer/JoinButton" to="CanvasLayer/TabContainer/LAN" method="_on_join_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TabContainer/LAN/HostButton" to="CanvasLayer/TabContainer/LAN" method="_on_host_button_pressed"]
+[connection signal="server_button_pressed" from="CanvasLayer/TabContainer/LAN/MatchesLANListUI" to="CanvasLayer/TabContainer/LAN" method="_on_matches_lan_list_ui_server_button_pressed"]
+[connection signal="timeout" from="CanvasLayer/TabContainer/LAN/MatchesLANListUI/Timer" to="CanvasLayer/TabContainer/LAN/MatchesLANListUI" method="_on_timer_timeout"]

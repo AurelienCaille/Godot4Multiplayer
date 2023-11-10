@@ -18,4 +18,9 @@ func _on_join_button_pressed() -> void:
 
 
 func _on_host_button_pressed() -> void:
+	ServiceDiscovery.set_server()
 	host_requested.emit()
+
+
+func _on_matches_lan_list_ui_server_button_pressed(server_ip) -> void:
+	ip_connection_requested.emit(server_ip)

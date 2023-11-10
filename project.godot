@@ -20,3 +20,8 @@ config/icon="res://icon.svg"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 LobbyManager="*res://addons/Multiplayer/Lobby/LobbyManager.tscn"
 MultiplayerManager="*res://addons/Multiplayer/MultiplayerManager.tscn"
+ServiceDiscovery="*res://addons/lan_servers_discovery/servers_discovery.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/lan_servers_discovery/plugin.cfg")
