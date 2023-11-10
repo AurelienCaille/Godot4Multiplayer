@@ -13,7 +13,7 @@ func _ready() -> void:
 func add_server_button(server_data : Dictionary) -> void:
 	var new_button := Button.new()
 	
-	new_button.text = str(server_data.server_ip)
+	new_button.text = "%s (%s)" % [server_data.server_data.Name, server_data.server_ip]
 	new_button.size_flags_horizontal = Control.SIZE_EXPAND
 	new_button.pressed.connect(_on_server_button_pressed.bind(server_data.server_ip))
 	

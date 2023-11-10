@@ -178,16 +178,6 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 text = "Join"
 
-[node name="HostButton" type="Button" parent="CanvasLayer/TabContainer/LAN"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.696078
-anchor_top = 0.893511
-anchor_right = 0.966912
-anchor_bottom = 0.946755
-text = "Host"
-metadata/_edit_use_anchors_ = true
-
 [node name="MatchesLANListUI" type="Control" parent="CanvasLayer/TabContainer/LAN"]
 anchors_preset = 0
 offset_left = 8.0
@@ -205,6 +195,30 @@ offset_bottom = 40.0
 wait_time = 3.0
 autostart = true
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/TabContainer/LAN"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.698529
+anchor_top = 0.800333
+anchor_right = 0.969363
+anchor_bottom = 0.861897
+offset_top = 55.9998
+offset_bottom = 55.9999
+metadata/_edit_use_anchors_ = true
+
+[node name="NameServerLineEdit" type="LineEdit" parent="CanvasLayer/TabContainer/LAN/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NewGame"
+
+[node name="HostButton" type="Button" parent="CanvasLayer/TabContainer/LAN/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "Host"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="CanvasLayer/MatchUI/Control/PlayButton" to="CanvasLayer/MatchUI" method="_on_play_button_pressed"]
 [connection signal="match_selected" from="CanvasLayer/TabContainer/Network/MatchesListUI" to="." method="_on_matches_list_ui_match_selected"]
 [connection signal="toggled" from="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer/PrivateCheckButton" to="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer/PrivateCheckButton" method="_on_toggled"]
@@ -213,6 +227,6 @@ autostart = true
 [connection signal="host_requested" from="CanvasLayer/TabContainer/LAN" to="." method="_on_direct_ip_host_connect_host_requested"]
 [connection signal="ip_connection_requested" from="CanvasLayer/TabContainer/LAN" to="." method="_on_direct_ip_host_connect_ip_connection_requested"]
 [connection signal="pressed" from="CanvasLayer/TabContainer/LAN/HBoxContainer/JoinButton" to="CanvasLayer/TabContainer/LAN" method="_on_join_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/LAN/HostButton" to="CanvasLayer/TabContainer/LAN" method="_on_host_button_pressed"]
 [connection signal="server_button_pressed" from="CanvasLayer/TabContainer/LAN/MatchesLANListUI" to="CanvasLayer/TabContainer/LAN" method="_on_matches_lan_list_ui_server_button_pressed"]
 [connection signal="timeout" from="CanvasLayer/TabContainer/LAN/MatchesLANListUI/Timer" to="CanvasLayer/TabContainer/LAN/MatchesLANListUI" method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/LAN/HBoxContainer2/HostButton" to="CanvasLayer/TabContainer/LAN" method="_on_host_button_pressed"]

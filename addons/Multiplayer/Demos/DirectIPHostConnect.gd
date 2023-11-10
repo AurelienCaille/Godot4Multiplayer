@@ -2,6 +2,8 @@ extends Panel
 
 
 @onready var ip_line_edit: LineEdit = $HBoxContainer/IPLineEdit
+@onready var name_server_line_edit: LineEdit = %NameServerLineEdit
+
 
 signal ip_connection_requested(ip : String)
 signal host_requested
@@ -18,6 +20,7 @@ func _on_join_button_pressed() -> void:
 
 
 func _on_host_button_pressed() -> void:
+	ServiceDiscovery.server_data['Name'] = name_server_line_edit.text
 	ServiceDiscovery.set_server()
 	host_requested.emit()
 
