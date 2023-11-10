@@ -7,7 +7,7 @@ var socket : NakamaSocket
 var multiplayer_bridge : NakamaMultiplayerBridge
 var has_nakama_connection : bool = false
 
-var local_user_id : String
+#var local_user_id : String = ""
 @export var players_in_current_match = {}
 
 signal match_joined(match_nakama)
@@ -51,7 +51,7 @@ func initialize(server_ip : String, server_port : int):
 	get_tree().get_multiplayer().set_multiplayer_peer(multiplayer_bridge.multiplayer_peer)
 	
 	# Connect bases multiplayer signals
-	socket.received_match_presence.connect(_on_match_presence)
+#	socket.received_match_presence.connect(_on_match_presence)
 
 	get_tree().get_multiplayer().peer_connected.connect(self._on_peer_connected)
 	get_tree().get_multiplayer().peer_disconnected.connect(self._on_peer_disconnected)
@@ -59,7 +59,8 @@ func initialize(server_ip : String, server_port : int):
 	multiplayer_bridge.match_joined.connect(self._on_match_joined)
 	
 	has_nakama_connection = true
-	local_user_id = str(session.user_id)
+#	local_user_id = str(session.user_id)
+#	local_user_id = str(multiplayer_bridge._my_peer_id)
 
 
 
@@ -75,7 +76,7 @@ func initialize_host_ip(server_port : int = 5269):
 
 	var id = get_tree().get_multiplayer().get_unique_id()
 	players_in_current_match[str(id)] = id
-	local_user_id = str(id)
+#	local_user_id = str(id)
 	match_ip_joined.emit()
 
 
@@ -122,9 +123,11 @@ func _on_match_join_error(error):
 
 func _on_match_joined() -> void:
 	var match_id = multiplayer_bridge.match_id if multiplayer_bridge else "local, no nakama ID"
-	print ("Joined match with id: ", match_id)
-	local_user_id = str(multiplayer.get_unique_id())
-
+	print ("Joined match id: ", match_id)
+	
+#	if has_nakama_connection:
+#		local_user_id = multiplayer_bridge._id_map[multiplayer.get_unique_id()]
+#	local_user_id = str(multiplayer_bridge._my_peer_id)
 
 func _on_peer_connected(peer_id):
 	print ("Peer joined match: ", peer_id)
@@ -133,3 +136,7 @@ func _on_peer_connected(peer_id):
 
 func _on_peer_disconnected(peer_id):
 	print ("Peer left match: ", peer_id)
+
+
+func register_player(id):
+	MultiplayerManager.players_in_current_match[str(id)] = id

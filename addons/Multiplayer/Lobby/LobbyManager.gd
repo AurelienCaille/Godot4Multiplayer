@@ -69,6 +69,7 @@ func join_private_match(match_id : String):
 ## Créer un match privé à partir d'un id
 func create_private_match(match_id : String):
 #	var result : NakamaAsyncResult = await nakama_socket.create_match_async(match_id)
+	MultiplayerManager.register_player(1)
 	multiplayer_bridge.join_named_match(match_id)
 
 
@@ -80,8 +81,10 @@ func create_public_match(match_id : String):
 		print("Error while trying to create private match, %s" % responses)
 
 	var payload_json : Dictionary = JSON.parse_string(responses.payload)
+
 	
 	MultiplayerManager.connect_to_match(payload_json["matchId"])
+	MultiplayerManager.register_player(1)
 #	MultiplayerManager.match_joined.emit(payload_json)
 	
 	print_debug(responses.payload)

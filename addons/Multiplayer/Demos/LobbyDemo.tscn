@@ -24,6 +24,7 @@ script = ExtResource("1_db50j")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="NakamaConnectHostPanel" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
 offset_left = 552.0
 offset_right = 792.0
 offset_bottom = 208.0
@@ -91,6 +92,7 @@ size_flags_horizontal = 3
 text = "Join"
 
 [node name="DirectIPHostConnect" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
 anchors_preset = -1
 anchor_left = 0.479167
 anchor_top = 0.358025
@@ -127,6 +129,7 @@ text = "Host"
 metadata/_edit_use_anchors_ = true
 
 [node name="MatchesListUI" parent="CanvasLayer" instance=ExtResource("2_woicc")]
+unique_name_in_owner = true
 anchors_preset = -1
 anchor_right = 0.458333
 anchor_bottom = 0.888889
