@@ -1,8 +1,8 @@
 extends Node
 
 
-@onready var nakama_connect_host_panel: Panel = %NakamaConnectHostPanel
-@onready var direct_ip_host_connect: Panel = %DirectIPHostConnect
+@onready var nakama_connect_host_panel: Panel = %Network
+@onready var direct_ip_host_connect: Panel = %LAN
 @onready var matches_list_ui: Control = %MatchesListUI
 
 

@@ -23,123 +23,14 @@ script = ExtResource("1_db50j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="NakamaConnectHostPanel" type="Panel" parent="CanvasLayer"]
-unique_name_in_owner = true
-offset_left = 552.0
-offset_right = 792.0
-offset_bottom = 208.0
-
-[node name="HostMatchUI" type="Control" parent="CanvasLayer/NakamaConnectHostPanel"]
-layout_mode = 1
-anchor_left = 0.0333333
-anchor_right = 0.966667
-anchor_bottom = 0.307692
-script = ExtResource("3_jxc0t")
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/NakamaConnectHostPanel/HostMatchUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 8.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/NakamaConnectHostPanel/HostMatchUI/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Name"
-
-[node name="PrivateCheckButton" type="CheckButton" parent="CanvasLayer/NakamaConnectHostPanel/HostMatchUI/HBoxContainer"]
-layout_mode = 2
-button_pressed = true
-text = "Private"
-script = SubResource("GDScript_ci3vm")
-
-[node name="HostButton" type="Button" parent="CanvasLayer/NakamaConnectHostPanel/HostMatchUI/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Host"
-
-[node name="JoinMatchUI" type="Control" parent="CanvasLayer/NakamaConnectHostPanel"]
-layout_mode = 1
-anchor_left = 0.0666667
-anchor_top = 0.615385
-anchor_right = 0.966667
-anchor_bottom = 0.923077
-script = ExtResource("4_jrk5l")
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/NakamaConnectHostPanel/JoinMatchUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/NakamaConnectHostPanel/JoinMatchUI/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Name"
-
-[node name="JoinButton" type="Button" parent="CanvasLayer/NakamaConnectHostPanel/JoinMatchUI/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Join"
-
-[node name="DirectIPHostConnect" type="Panel" parent="CanvasLayer"]
-unique_name_in_owner = true
-anchors_preset = -1
-anchor_left = 0.479167
-anchor_top = 0.358025
-anchor_right = 0.6875
-anchor_bottom = 0.592593
-script = ExtResource("4_bwcs2")
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/DirectIPHostConnect"]
-layout_mode = 0
-anchor_left = 0.0333333
-anchor_top = 0.0526316
-anchor_right = 0.966667
-anchor_bottom = 0.315789
-metadata/_edit_use_anchors_ = true
-
-[node name="IPLineEdit" type="LineEdit" parent="CanvasLayer/DirectIPHostConnect/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "127.0.0.1"
-metadata/_edit_use_anchors_ = true
-
-[node name="JoinButton" type="Button" parent="CanvasLayer/DirectIPHostConnect/HBoxContainer"]
-layout_mode = 2
-text = "Join"
-
-[node name="HostButton" type="Button" parent="CanvasLayer/DirectIPHostConnect"]
-layout_mode = 0
-anchor_left = 0.0333333
-anchor_top = 0.684211
-anchor_right = 0.966667
-anchor_bottom = 0.947368
-text = "Host"
-metadata/_edit_use_anchors_ = true
-
-[node name="MatchesListUI" parent="CanvasLayer" instance=ExtResource("2_woicc")]
-unique_name_in_owner = true
-anchors_preset = -1
-anchor_right = 0.458333
-anchor_bottom = 0.888889
-
 [node name="MatchUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchor_left = 0.722222
-anchor_right = 1.0
-anchor_bottom = 0.737654
+anchor_top = 0.0123457
+anchor_right = 0.993056
+anchor_bottom = 0.987654
 script = ExtResource("5_6k4n0")
+metadata/_edit_use_anchors_ = true
 
 [node name="Control" type="Control" parent="CanvasLayer/MatchUI"]
 anchors_preset = 0
@@ -176,12 +67,132 @@ offset_right = 192.0
 offset_bottom = 431.0
 text = "Play"
 
-[connection signal="toggled" from="CanvasLayer/NakamaConnectHostPanel/HostMatchUI/HBoxContainer/PrivateCheckButton" to="CanvasLayer/NakamaConnectHostPanel/HostMatchUI/HBoxContainer/PrivateCheckButton" method="_on_toggled"]
-[connection signal="pressed" from="CanvasLayer/NakamaConnectHostPanel/HostMatchUI/HBoxContainer/HostButton" to="CanvasLayer/NakamaConnectHostPanel/HostMatchUI" method="_on_host_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/NakamaConnectHostPanel/JoinMatchUI/HBoxContainer/JoinButton" to="CanvasLayer/NakamaConnectHostPanel/JoinMatchUI" method="_on_join_button_pressed"]
-[connection signal="host_requested" from="CanvasLayer/DirectIPHostConnect" to="." method="_on_direct_ip_host_connect_host_requested"]
-[connection signal="ip_connection_requested" from="CanvasLayer/DirectIPHostConnect" to="." method="_on_direct_ip_host_connect_ip_connection_requested"]
-[connection signal="pressed" from="CanvasLayer/DirectIPHostConnect/HBoxContainer/JoinButton" to="CanvasLayer/DirectIPHostConnect" method="_on_join_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/DirectIPHostConnect/HostButton" to="CanvasLayer/DirectIPHostConnect" method="_on_host_button_pressed"]
-[connection signal="match_selected" from="CanvasLayer/MatchesListUI" to="." method="_on_matches_list_ui_match_selected"]
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 824.0
+offset_bottom = 640.0
+
+[node name="Network" type="Panel" parent="CanvasLayer/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="MatchesListUI" parent="CanvasLayer/TabContainer/Network" instance=ExtResource("2_woicc")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.458333
+anchor_bottom = 0.888889
+offset_left = -552.0
+offset_right = -552.0
+
+[node name="HostMatchUI" type="Control" parent="CanvasLayer/TabContainer/Network"]
+layout_mode = 1
+anchor_left = 0.568627
+anchor_top = 0.747088
+anchor_right = 0.966912
+anchor_bottom = 0.826955
+script = ExtResource("3_jxc0t")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Network/HostMatchUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Name"
+
+[node name="PrivateCheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Private"
+script = SubResource("GDScript_ci3vm")
+
+[node name="HostButton" type="Button" parent="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Host"
+
+[node name="JoinMatchUI" type="Control" parent="CanvasLayer/TabContainer/Network"]
+layout_mode = 1
+anchor_left = 0.578431
+anchor_top = 0.853577
+anchor_right = 0.966912
+anchor_bottom = 0.923461
+script = ExtResource("4_jrk5l")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Network/JoinMatchUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/TabContainer/Network/JoinMatchUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Name"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/TabContainer/Network/JoinMatchUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Join"
+
+[node name="LAN" type="Panel" parent="CanvasLayer/TabContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("4_bwcs2")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/LAN"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.698529
+anchor_top = 0.800333
+anchor_right = 0.969363
+anchor_bottom = 0.861897
+metadata/_edit_use_anchors_ = true
+
+[node name="IPLineEdit" type="LineEdit" parent="CanvasLayer/TabContainer/LAN/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+metadata/_edit_use_anchors_ = true
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/TabContainer/LAN/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "Join"
+
+[node name="HostButton" type="Button" parent="CanvasLayer/TabContainer/LAN"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.696078
+anchor_top = 0.893511
+anchor_right = 0.966912
+anchor_bottom = 0.946755
+text = "Host"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="CanvasLayer/MatchUI/Control/PlayButton" to="CanvasLayer/MatchUI" method="_on_play_button_pressed"]
+[connection signal="match_selected" from="CanvasLayer/TabContainer/Network/MatchesListUI" to="." method="_on_matches_list_ui_match_selected"]
+[connection signal="toggled" from="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer/PrivateCheckButton" to="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer/PrivateCheckButton" method="_on_toggled"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Network/HostMatchUI/HBoxContainer/HostButton" to="CanvasLayer/TabContainer/Network/HostMatchUI" method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Network/JoinMatchUI/HBoxContainer/JoinButton" to="CanvasLayer/TabContainer/Network/JoinMatchUI" method="_on_join_button_pressed"]
+[connection signal="host_requested" from="CanvasLayer/TabContainer/LAN" to="." method="_on_direct_ip_host_connect_host_requested"]
+[connection signal="ip_connection_requested" from="CanvasLayer/TabContainer/LAN" to="." method="_on_direct_ip_host_connect_ip_connection_requested"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/LAN/HBoxContainer/JoinButton" to="CanvasLayer/TabContainer/LAN" method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/LAN/HostButton" to="CanvasLayer/TabContainer/LAN" method="_on_host_button_pressed"]
