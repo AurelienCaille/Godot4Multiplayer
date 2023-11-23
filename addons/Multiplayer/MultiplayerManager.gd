@@ -125,6 +125,8 @@ func _on_match_joined() -> void:
 	var match_id = multiplayer_bridge.match_id if multiplayer_bridge else "local, no nakama ID"
 	print ("Joined match id: ", match_id)
 	
+	match_joined.emit(match_id)
+	
 #	if has_nakama_connection:
 #		local_user_id = multiplayer_bridge._id_map[multiplayer.get_unique_id()]
 #	local_user_id = str(multiplayer_bridge._my_peer_id)
