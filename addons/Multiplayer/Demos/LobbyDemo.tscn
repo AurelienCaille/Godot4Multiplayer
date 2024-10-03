@@ -73,11 +73,12 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 824.0
 offset_bottom = 640.0
+current_tab = 0
 
 [node name="Network" type="Panel" parent="CanvasLayer/TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="MatchesListUI" parent="CanvasLayer/TabContainer/Network" instance=ExtResource("2_woicc")]
 unique_name_in_owner = true
@@ -153,9 +154,11 @@ text = "Join"
 
 [node name="LAN" type="Panel" parent="CanvasLayer/TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 script = ExtResource("4_bwcs2")
 metadata/_edit_use_anchors_ = true
+metadata/_tab_index = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/LAN"]
 layout_mode = 1
